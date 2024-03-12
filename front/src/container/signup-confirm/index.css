@@ -1,0 +1,42 @@
+.sign-text {
+  margin: 0 auto;
+
+  font-size: 16px;
+
+  color: black;
+}
+
+.sign__box {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.sign__box-mini {
+}
+
+.padding-text {
+  padding-bottom: 8px;
+}
+
+.sign-input {
+  width: 353px;
+  height: 54px;
+
+  border: 1px solid gray;
+  border-radius: 12px;
+
+  padding-left: 10px;
+}
+
+.sing-question-box {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  justify-content: start;
+
+  gap: 5px;
+}

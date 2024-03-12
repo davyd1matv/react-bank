@@ -5,10 +5,12 @@ const router = express.Router()
 // Підключіть файли роутів
 // const test = require('./test')
 // Підключіть інші файли роутів, якщо є
+const bank = require('./bank')
 
 // Об'єднайте файли роутів за потреби
 // router.use('/', test)
 // Використовуйте інші файли роутів, якщо є
+router.use('/', bank)
 
 router.get('/', (req, res) => {
   res.status(200).json('Hello World')

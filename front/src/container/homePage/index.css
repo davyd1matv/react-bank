@@ -1,0 +1,82 @@
+.home-top {
+  background-image: url("fon.png");
+
+  height: 583px;
+  width: 393px;
+
+  border-radius: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.home-title {
+  padding-top: 20px;
+
+  margin: 0 auto;
+
+  font-size: 30px;
+  font-weight: bold;
+
+  color: white;
+}
+
+.home-text {
+  margin: 0 auto;
+
+  font-size: 16px;
+
+  color: white;
+}
+
+.home-bank {
+  background-image: url("bank.png");
+
+  /* background-size: contain; */
+
+  /* position: fixed; */
+  padding-top: 0;
+  margin-left: -300px;
+
+  height: 851px;
+  max-height: 100%;
+  width: 851px;
+  max-width: 100%;
+  /* z-index: 1; */
+  /* padding-right: -100px; */
+  /* right: 650px;
+
+  /* display: flex; */
+  /* justify-content: center; */
+
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* position: start; */
+
+  /* padding-left: -100px; */
+
+  /* width: 300px;
+  height: 300px; */
+
+  /* position: absolute;
+  padding-left: -700px;
+  padding-top: -1000px; */
+}
+
+.home-bottom {
+  height: 100%;
+  max-height: 269px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding-bottom: 46px;
+}
+
+.home-button {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
