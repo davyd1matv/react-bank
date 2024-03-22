@@ -1,20 +1,36 @@
-// Підключаємо роутер до бек-енду
 const express = require('express')
 const router = express.Router()
 
-// Підключіть файли роутів
-// const test = require('./test')
-// Підключіть інші файли роутів, якщо є
-const bank = require('./bank')
+router.get('/', function (req, res) {
+  res.render('index', {
+    name: 'index',
 
-// Об'єднайте файли роутів за потреби
-// router.use('/', test)
-// Використовуйте інші файли роутів, якщо є
-router.use('/', bank)
+    component: [''],
 
-router.get('/', (req, res) => {
-  res.status(200).json('Hello World')
+    title: 'Index page',
+
+    data: {},
+  })
 })
 
-// Експортуємо глобальний роутер
+// ==================================
+
+router.get('/logout', function (req, res) {
+  res.render('logout', {
+    name: 'logout',
+
+    component: [''],
+
+    title: 'Logout page',
+
+    data: {},
+  })
+})
+
+const auth = require('./auth')
+router.use('/', auth)
+
+// const account = require('./account')
+// router.use('/', account)
+
 module.exports = router

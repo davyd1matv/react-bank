@@ -14,6 +14,8 @@ class Confirm {
     const conf = new Confirm(data)
     this.#list.push(conf)
 
+    //   this.#list.push(new Confirm(data)) // Можливо слід записати ось так
+
     setTimeout(() => {
       this.delete(conf.code)
     }, 24 * 60 * 60 * 1000) // 24 hours, miliSecond
@@ -47,7 +49,7 @@ class Confirm {
         JSON.stringify(item.data) === JSON.stringify(data),
     )
     return confirmObject ? confirmObject.code : null
-  } // Уточнити нахера цей код!!!
+  }
 }
 
 module.exports = {

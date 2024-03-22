@@ -1,0 +1,133 @@
+@use './index' as s;
+
+.auth__box {
+	display: grid;
+	flex-direction: center;
+	gap: 20px;
+}
+
+.auth__field {
+	display: flex;
+	flex-direction: column;
+	// gap: s.space(3);
+	gap: 20px;
+}
+
+.auth__title {
+	padding-top: 20px;
+
+	margin: 0 auto;
+
+	font-size: 40px;
+	font-weight: bold;
+
+	color: black;
+}
+
+.auth__subtext {
+	margin: 0 auto;
+	font-size: 18px;
+	color: black;
+}
+
+.signup__question {
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	justify-content: start;
+	gap: 5px;
+}
+
+.signup__question-text {
+	font-size: 16px;
+	color: black;
+}
+
+.signup__link {
+	text-decoration: underline;
+	color: blue;
+	font-size: 16px;
+}
+
+.alert {
+	border: 1px solid transparent;
+	border-radius: 10px;
+	padding: s.space(3) s.space(4);
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	position: relative;
+
+
+	&--success {
+		color: s.color(green);
+		background-color: s.color(green-light);
+
+		&::before {
+			content: "";
+			display: block;
+			height: 14px;
+			width: 14px;
+			background-image: url('../../public/svg/done-sign.svg');
+			background-size: 12px 12px;
+			background-repeat: no-repeat;
+			background-position: center center;
+			margin-right: 8px;
+		}
+	}
+
+	&--progress {
+		color: s.color(blue);
+		background-color: s.color(blue-light);
+
+		&::before {
+			content: "";
+			display: block;
+			height: 14px;
+			width: 14px;
+			background-image: url('../../public/svg/loading-sign.svg');
+			background-size: 12px 12px;
+			background-repeat: no-repeat;
+			background-position: center center;
+			margin-right: 8px;
+		}
+	}
+
+
+	&--error {
+		color: s.color(orange);
+		background-color: s.color(orange-light);
+
+
+		&::before {
+			content: "";
+			display: block;
+			height: 14px;
+			width: 14px;
+			background-image: url('../../public/svg/danger-sign.svg');
+			background-size: 12px 12px;
+			background-repeat: no-repeat;
+			background-position: center center;
+			margin-right: 8px;
+		}
+	}
+
+
+	&--disabled {
+		display: none;
+	}
+
+}
+
+.link {
+	color: s.color(main);
+	font-size: 14px;
+	text-decoration: underline;
+
+	@include s.click;
+}
+
+.link__prefix {
+	font-size: 14px;
+	color: s.color(dark);
+}

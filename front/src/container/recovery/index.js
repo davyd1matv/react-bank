@@ -1,44 +1,49 @@
-import "./index.css";
+import Page from "../../page/Page";
 
-import Page from "../../component/page";
+import BackButtonComponent from "../../component/back-button";
+
+import AuthBox from "../../component/authBox";
 import HeaderDark from "../../component/header-dark";
 import Button from "../../component/button";
-import Back from "../../component/back";
-import SignTitle from "../../component/signTitle";
-import SignBox from "../../component/signBox";
+import BoxField from "../../component/boxFiled";
 
-export default function Recovery({}) {
+import "./index.scss";
+
+const RecoveryForm = ({ handleSubmit, VE, onChange, disabled }) => {
   return (
     <Page>
-      <SignBox>
+      <AuthBox>
         <HeaderDark />
+        <BackButtonComponent />
 
-        <Back />
+        <form onSubmit={handleSubmit} className="auth__box">
+          <h1 className="auth__title">Recover password</h1>
 
-        <SignTitle
-          title={"Recovery password"}
-          info={"Choose a recovery method"}
-        />
+          <p className="auth__subtext">Choose a recovery method</p>
 
-        <div className="sign__box">
-          <div className="sign__box-mini">
-            <p className="sign-text padding-text">Email</p>
-            <input className="sign-input"></input>
+          <div className="auth__field">
+            <BoxField
+              emailform
+              name="email"
+              type="email"
+              placeholder="test@test"
+              label="Email"
+              errorMessage="Enter the correct value of the e-mail address"
+              value={VE}
+              onChange={onChange}
+              required={true}
+            />
           </div>
 
-          {/* <div className="sign__box-mini">
-            <p className="sign-text padding-text">Password</p>
-            <input className="sign-input"></input>
-          </div> */}
+          <Button pink type="submit" disabled={disabled}>
+            Send code
+          </Button>
 
-          {/* <div className="sing-question-box">
-            <p className="sign-text">Forgot your password? </p>
-            <a href="/recovery">Restore</a>
-          </div> */}
-
-          <Button pink>Send code</Button>
-        </div>
-      </SignBox>
+          <span className={`alert alert--disabled`} />
+        </form>
+      </AuthBox>
     </Page>
   );
-}
+};
+
+export default RecoveryForm;

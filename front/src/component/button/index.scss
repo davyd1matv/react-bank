@@ -1,0 +1,45 @@
+.button {
+	height: 56px;
+	width: 353px;
+
+	border-radius: 12px;
+
+	/* // */
+	background-color: white;
+	border: 1px solid #775ce5;
+	color: #775ce5;
+	font-size: 20px;
+
+	z-index: 1;
+
+	&:hover {
+		opacity: 0.9;
+	}
+
+	&:active {
+		opacity: 0.7;
+	}
+
+
+	&--pink {
+		background-color: #775ce5;
+		color: white;
+	}
+
+	&--red {
+		background-color: white;
+		border: 1px solid red;
+		color: red;
+	}
+
+	&--disabled {
+		opacity: 0.5;
+		cursor: default;
+
+		&:hover,
+		&:active {
+			opacity: 0.5;
+			cursor: default;
+		}
+	}
+}

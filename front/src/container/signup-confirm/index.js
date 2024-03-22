@@ -1,44 +1,71 @@
-import "./index.css";
+import Page from "../../page/Page";
 
-import Page from "../../component/page";
+import BoxField from "../../component/boxFiled";
+import AuthBox from "../../component/authBox";
 import HeaderDark from "../../component/header-dark";
+import BackButtonComponent from "../../component/back-button";
 import Button from "../../component/button";
-import Back from "../../component/back";
-import SignTitle from "../../component/signTitle";
-import SignBox from "../../component/signBox";
+import "./index.scss";
 
-export default function SignupConfirm({}) {
+const SignupConfirm = ({
+  handleSubmit,
+  VC,
+  onChange,
+  handleRenewLinkClick,
+  disabled,
+  AS,
+  AT,
+  confirmationCode,
+  logout,
+}) => {
   return (
     <Page>
-      <SignBox>
+      <AuthBox>
         <HeaderDark />
 
-        <Back />
+        <BackButtonComponent />
 
-        <SignTitle
-          title={"Confirm account"}
-          info={"Write the code you received"}
-        />
+        <form onSubmit={handleSubmit} className="auth__box">
+          <h1 className="auth__title">Confirm account</h1>
 
-        <div className="sign__box">
-          <div className="sign__box-mini">
-            <p className="sign-text padding-text">Code</p>
-            <input className="sign-input"></input>
+          <p className="auth__subtext">Write the code you received</p>
+
+          <div className="auth__field">
+            <BoxField
+              emailform
+              name="code"
+              type="number"
+              placeholder="Your code"
+              label="Code"
+              errorMessage="Enter the correct value of the code"
+              value={VC}
+              onChange={onChange}
+              required={true}
+            />
           </div>
 
-          {/* <div className="sign__box-mini">
-            <p className="sign-text padding-text">Email</p>
-            <input className="sign-input"></input>
-          </div> */}
+          <div className="signup__question">
+            <p className="signup__question-text">Lost your code?</p>
+            <button onClick={handleRenewLinkClick} className="signup__link">
+              Send it again
+            </button>
+          </div>
 
-          {/* <div className="sing-question-box">
-            <p className="sign-text">Already have an account? </p>
-            <a href="/singin">Sign in</a>
-          </div> */}
+          <Button pink type="submit" disabled={disabled}>
+            Send
+          </Button>
 
-          <Button pink>Continue</Button>
-        </div>
-      </SignBox>
+          <Button red onClick={logout}>
+            Logout
+          </Button>
+
+          <span className={"alert alert--disabled"} />
+
+          <div>{confirmationCode}</div>
+        </form>
+      </AuthBox>
     </Page>
   );
-}
+};
+
+export default SignupConfirm;

@@ -1,0 +1,87 @@
+@use '../../style' as s;
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: s.space(2);
+
+	&__password {
+		height: 100%;
+	}
+
+	&__label {
+		font-size: 16px;
+		color: s.color(dark);
+	}
+
+	&__wrapper {
+		width: 100%;
+		display: grid;
+		// gap: s.space(2);
+
+		position: relative;
+	}
+
+	&__input {
+		border: 1px solid s.color(box);
+		background-color: s.color(white);
+		width: 100%;
+
+
+		padding: s.space(3.5);
+		border-radius: 10px;
+
+		font-size: 16px;
+
+		&::placeholder {
+			color: s.color(gray);
+		}
+
+		color: s.color(dark);
+
+		transition: border-color 0.3s;
+
+		&:hover {
+			border-color: s.color(gray);
+		}
+
+		&:focus {
+			border-color: s.color(main);
+		}
+	}
+
+	&__input:invalid[focused="true"] {
+		border-color: s.color(red)
+	}
+
+	&__input:invalid[focused="true"]~span {
+		display: block;
+	}
+
+	&__span {
+		padding-top: 3px;
+		color: s.color(red);
+		font-size: 16px;
+		display: none;
+	}
+
+	&__icon {
+		@include s.click;
+
+		display: block;
+		height: 30px;
+		width: 30px;
+
+		background-image: url('../../../public/svg/password-hide.svg');
+		background-size: cover;
+
+		&[show] {
+			background-image: url('../../../public/svg/password-show.svg');
+		}
+
+		position: absolute;
+		right: 16px;
+		top:12px;
+		// top: calc(50% - 10px);
+	}
+}

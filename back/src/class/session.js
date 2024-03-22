@@ -3,21 +3,21 @@ class Session {
 
   constructor(user) {
     this.token = Session.generateCode()
-    // this.user = {
-    //   id: user.id,
-    //   email: user.email,
-    //   password: user.password,
-    //   isConfirm: user.isConfirm,
-    //   //   role: user.role,
-    // }
-    //   or
     this.user = user
+    // Можливо слід зробити ось так:
+    //   this.user = {
+    //   email: user.email,
+    //   isConfirm: user.isConfirm,
+    //   role: user.role,
+    //   id: user.id,
+    // }
   }
 
   static generateCode = () => {
     const length = 6
     const characters =
-      'QWERTYUIOPLKJHGFDSAZCVBNMqwertyuioplkjhgfdsazxcvbnm1234567890'
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890'
+
     let result = ''
 
     for (let i = 0; i < length; i++) {
@@ -49,5 +49,3 @@ class Session {
 module.exports = {
   Session,
 }
-
-console.log(Session.generateCode())

@@ -1,20 +1,23 @@
-import "./index.css";
+import "./index.scss";
 
 export default function Button({
   children,
   pink,
+  red,
   style,
   condition,
   onClick,
   type,
+  disabled,
 }) {
   return (
     <button
       type={type}
       style={style}
-      className={`button ${pink ? "button-pink" : "button-white"}
-	 
-	  `}
+      className={`button ${pink ? "button--pink" : ""} ${
+        red ? "button--red" : ""
+      }
+	  ${disabled ? "button--disabled" : ""}`}
       onClick={onClick}
     >
       {children}
