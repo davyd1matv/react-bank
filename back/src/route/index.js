@@ -30,7 +30,7 @@ router.get('/logout', function (req, res) {
 const auth = require('./auth')
 router.use('/', auth)
 
-// const account = require('./account')
-// router.use('/', account)
+const balance = require('./balance')
+router.use('/', balance)
 
 module.exports = router

@@ -1,0 +1,27 @@
+@use '../../style' as s;
+// @use '../../style/form.scss' as form;
+
+.number-box {}
+
+.number-card {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.number-title {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.number-input {
+	border: 1px solid s.color(box);
+	border-radius: 10px;
+
+	width: 100%;
+
+	padding: s.space(3.5);
+	border-radius: 10px;
+
+	font-size: 16px;
+}

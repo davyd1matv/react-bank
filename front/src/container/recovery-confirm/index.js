@@ -48,7 +48,6 @@ const RecoveryConfirmForm = ({
               placeholder="Your password"
               label="Password"
               errorMessage="The password must consist of at least 8 characters, including at least one number, lowercase and uppercase letters"
-              pattern={`^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$`}
               value={VP}
               onChange={onChange}
               required={true}

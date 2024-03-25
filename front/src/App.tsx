@@ -21,6 +21,15 @@ import {
   RecoveryConfirmPage,
 } from "./group";
 
+import {
+  BalancePage,
+  NotificationsPage,
+  SettingsPage,
+  SendPage,
+  ReceivePage,
+  TransactionPage,
+} from "./group/balance";
+
 const AuthContext = createContext<any>(null);
 
 const initialState = {
@@ -165,7 +174,7 @@ function App() {
               </AuthRoute>
             }
           />
-          {/* <Route
+          <Route
             path="/balance"
             element={
               <PrivateRoute>
@@ -212,7 +221,7 @@ function App() {
                 <TransactionPage />
               </PrivateRoute>
             }
-          /> */}
+          />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

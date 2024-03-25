@@ -67,13 +67,13 @@ const BoxField = ({
             onBlur={handleFocus}
             // onFocus={() => name === "passwordAgain" && setFocused(true)}
             focused={focused.toString()}
+            pattern={`^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$`}
           />
         ) : (
           <>
             <input
               //   {...fieldProps}
               placeholder={placeholder}
-              pattern={pattern}
               value={value}
               //   VP={VP}
               name={name}
@@ -83,6 +83,7 @@ const BoxField = ({
               onBlur={handleFocus}
               //   onFocus={() => name === "passwordAgain" && setFocused(true)}
               focused={focused.toString()}
+              pattern={`^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{1,20}$`}
             />
             <span onClick={handleToggleClick} className="field__icon"></span>
           </>

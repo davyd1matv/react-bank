@@ -1,0 +1,80 @@
+@use '../../style' as s;
+
+.box-card {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 24px;
+	padding-left: 30px;
+	// gap: 20px;
+}
+
+.box-info {
+	text-decoration: none;
+	color: s.color(dark);
+	display: grid;
+	width: 100%;
+	grid-template-columns: min-content 1fr min-content;
+	align-items: center;
+	background-color: white;
+	gap: s.space(4);
+	border-radius: 12px;
+
+	&__click {
+		@include s.click;
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: s.space(2);
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: 450;
+	}
+
+	&__details {
+		display: flex;
+		flex-direction: row;
+		font-size: 12px;
+		color: s.color(gray);
+		align-items: flex-end;
+	}
+
+	&__amount-plus {
+		color: s.color(green);
+		font-weight: 500;
+	}
+
+	&__amount-minus {
+		color: s.color(dark);
+		font-weight: 500;
+	}
+
+}
+
+.box-info__type {
+	color: black;
+	font-size: 14px;
+}
+
+.box-info__type::before {
+	content: '\00b7';
+	padding: 0 s.space(1);
+	font-size: 16px;
+}
+
+.box-info__amount-box {
+	padding-right: 5px;
+}
+
+.box-info__amount-plus:before {
+	content: '+$';
+	font-size: 16px;
+}
+
+.box-info__amount-minus:before {
+	content: '-$';
+	font-size: 16px;
+}

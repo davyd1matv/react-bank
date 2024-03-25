@@ -32,7 +32,7 @@ const Signup = ({ handleSubmit, onChange, VE, VP, disabled }) => {
               placeholder="test@test.com"
               label="Email"
               errorMessage="Enter the correct value of the e-mail address"
-              VE={VE}
+              value={VE}
               onChange={onChange}
               required={true}
             />
@@ -43,8 +43,7 @@ const Signup = ({ handleSubmit, onChange, VE, VP, disabled }) => {
               placeholder="Your password"
               label="Password"
               errorMessage="The password must consist of at least 8 characters, including at least one number, lowercase and uppercase letters"
-              pattern={`^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$`}
-              VP={VP}
+              value={VP}
               onChange={onChange}
               required={true}
             />
