@@ -4,7 +4,6 @@ class Session {
   constructor(user) {
     this.token = Session.generateCode()
     this.user = user
-    // Можливо слід зробити ось так:
     //   this.user = {
     //   email: user.email,
     //   isConfirm: user.isConfirm,

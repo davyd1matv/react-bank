@@ -1,4 +1,4 @@
-// @use '../../style' as s;
+@use '../../style' as s;
 
 .page-balance {
 	width: 393px;
@@ -9,7 +9,7 @@
 
 	margin: 0 auto;
 
-	background-color: #f3f3ff;
+	background-color: s.color(light-blue);
 }
 
 // :root {

@@ -1,13 +1,9 @@
 import BackButton from "../../component/back-button";
 import BoxNumber from "../../component/boxNumber";
 import Divider from "../../component/divider";
-// import { useNavigate } from "react-router-dom";
-// import { useState, useEffect } from "react";
-// import { saveSession } from "../../script/session";
-// import { useAuth } from "../../context/AuthContext";
-// import { validateAmount } from "../../script/utilities";
 import "./index.scss";
 import Page from "../../page/Page";
+import PageBalance from "../../page/PageBalance";
 import AuthBox from "../../component/authBox";
 import HeaderDark from "../../component/header-dark";
 
@@ -17,49 +13,52 @@ const Receive = ({
   errorMessages,
   onClickStripe,
   onClickCoin,
+  disabled,
 }) => {
   return (
-    <Page>
+    <PageBalance>
       <AuthBox>
         <HeaderDark />
 
-        <header className="account-page__header">
+        <header className="balanceBox-title">
           <BackButton />
 
-          <h2 className="auth__title">Receive</h2>
+          <h2 className="auth__title--medium">Receive</h2>
         </header>
 
         <div className="auth__field">
           <BoxNumber
             name="amount"
             type="number"
-            // labelClassName="field__label--bold"
             label="Receive amount"
             value={value}
             onChange={onChange}
             errorMessages={errorMessages}
           />
 
+          <span className={"alert alert--disabled"} />
+
           <Divider />
 
-          <div className="payment-card__box">
-            <div className="page__section--title">Payment system</div>
+          <div className="receive__box">
+            <div className="receive--title">Payment system</div>
 
             <button
               onClick={onClickStripe}
-              id="stripeCard"
-              className="card card--disabled"
+              className={`receive-card ${
+                disabled ? "receive-card--disabled" : ""
+              }`}
             >
               <img
                 src="/svg/stripe.svg"
-                className="card__image"
+                className="receive-card__image"
                 alt=""
                 width="40"
                 height="40"
               />
-              <div className="card__info">
-                <div className="card__title">Stripe</div>
-                <div className="card__types">
+              <div className="receive-card__info">
+                <div className="receive-card__title">Stripe</div>
+                <div className="receive-card__types">
                   <img src="/svg/stripe-info.svg" alt="Stripe Info" />
                 </div>
               </div>
@@ -67,29 +66,28 @@ const Receive = ({
 
             <button
               onClick={onClickCoin}
-              id="coinCard"
-              className="card card--disabled"
+              className={`receive-card ${
+                disabled ? "receive-card--disabled" : ""
+              }`}
             >
               <img
                 src="/svg/coin.svg"
-                className="card__image"
+                className="receive-card__image"
                 alt=""
                 width="40"
                 height="40"
               />
-              <div className="card__info">
-                <div className="card__title">Coin</div>
-                <div className="card__types">
+              <div className="receive-card__info">
+                <div className="receive-card__title">Coin</div>
+                <div className="receive-card__types">
                   <img src="/svg/coin-info.svg" alt="Coin Info" />
                 </div>
               </div>
             </button>
           </div>
-
-          <span className={"alert alert--disabled"} />
         </div>
       </AuthBox>
-    </Page>
+    </PageBalance>
   );
 };
 

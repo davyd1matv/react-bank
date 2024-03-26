@@ -1,14 +1,13 @@
 @use "../../style" as s;
-@use "../../style/form.scss" as form;
-@use "../../style/account.scss" as a;
+@use "../../style/auth.scss" as auth;
 
-.payment-card__box {
+.receive__box {
 	display: flex;
 	flex-direction: column;
 	gap: s.space(3);
 }
 
-.page__section--title {
+.receive--title {
 	font-weight: 500;
 }
 
@@ -26,7 +25,7 @@
 	}
 }
 
-.card {
+.receive-card {
 	@include s.click;
 
 	display: flex;

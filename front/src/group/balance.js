@@ -2,28 +2,11 @@ import { useEffect, useState } from "react";
 import { saveSession, getTokenSession } from "../script/session";
 import { Navigate, useParams } from "react-router-dom";
 
-import Wellcome from "../container/welcome";
-import Signup from "../container/signup";
-import Signin from "../container/signin";
-import Recovery from "../container/recovery";
-import RecoveryConfirm from "../container/recovery-confirm";
-import SignupConfirm from "../container/signup-confirm";
-import Balance from "../container/balance";
-// import Notifications from "../container/notifications";
-// import Send from "../container/send";
-// import Receive from "../container/receive";
-// import Transaction from "../container/transaction";
-
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
-// import Settings from "../container/settings";
-import { validateAmount } from "../script/utilities";
-import Button from "../component/button";
-
 import { setAlert } from "../component/alert";
-
 import { useAuth } from "../App";
-import BoxField from "../component/boxFiled";
+
+import Balance from "../container/balance";
 import Settings from "../container/settings";
 import Receive from "../container/receive";
 import Notifications from "../container/notifications";
@@ -38,34 +21,7 @@ export const BalancePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      //   try {
-      //     const response = await axios.get("/balance", {
-      //       params: {
-      //         token: stateAuth.token,
-      //       },
-      //     });
-
-      //     setData(response.data);
-      //     stateAuth.user.isConfirm = true;
-      //   } catch (error) {
-      //     logout();
-      //     console.error("Error fetching balance data:", error);
-      //   }
-
-      //==========
-
       try {
-        // const response = await fetch("http://localhost:4000/balance", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     token: stateAuth.token,
-        //     // token: getTokenSession(),
-        //   }),
-        // });
-
         const response = await fetch(
           `http://localhost:4000/balance?token=${stateAuth.token}`
         );
@@ -74,11 +30,6 @@ export const BalancePage = () => {
 
         setData(data);
         stateAuth.user.isConfirm = true;
-
-        ///////////
-
-        // setData(response.data);
-        // stateAuth.user.isConfirm = true;
       } catch (error) {
         logout();
         console.error("Error fetching balance data:", error);
@@ -92,19 +43,7 @@ export const BalancePage = () => {
     return <Navigate to="/signup-confirm" />;
   }
 
-  return (
-    <Balance
-      data={data}
-      //   handleSubmit={handleSubmit}
-      //   handleSubmit={handleSubmit}
-      //   onChange={onChange}
-      //   VE={values.email}
-      //   VP={values.password}
-      //   VPA={values.passwordAgain}
-      //   disabled={disabled}
-      //   alert={alert}
-    />
-  );
+  return <Balance data={data} />;
 };
 
 export const SettingsPage = () => {
@@ -130,42 +69,10 @@ export const ReceivePage = () => {
   const checkDisabled = () => {
     const isDisabled = Object.values(values).some((value) => value === "");
     setDisabled(isDisabled);
-
-    const stripeCard = document.getElementById("stripeCard");
-    const coinCard = document.getElementById("coinCard");
-
-    if (stripeCard && coinCard) {
-      const alert = document.querySelector(`.alert`);
-      const isCardDisabled = Boolean(isDisabled);
-
-      stripeCard.classList.toggle("card--disabled", isCardDisabled);
-      coinCard.classList.toggle("card--disabled", isCardDisabled);
-
-      if (isCardDisabled) {
-        stripeCard.setAttribute("disabled", "true");
-        coinCard.setAttribute("disabled", "true");
-      } else {
-        stripeCard.removeAttribute("disabled");
-        coinCard.removeAttribute("disabled");
-        alert.className = "alert alert--disabled";
-      }
-    }
   };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const handleInputChange = (event) => {
-    const newValue = event.target.value;
-    onChange({
-      target: {
-        name: "amount",
-        value: newValue,
-      },
-    });
-    const newErrorMessages = validateAmount(newValue);
-    setErrorMessages(newErrorMessages);
   };
 
   const handleSubmitStripe = async (stop) => {
@@ -233,10 +140,12 @@ export const ReceivePage = () => {
   return (
     <Receive
       value={values.amount}
-      onChange={handleInputChange}
+      //   onChange={handleInputChange}
+      onChange={onChange}
       errorMessages={errorMessages}
       onClickStripe={handleSubmitStripe}
       onClickCoin={handleSubmitCoin}
+      disabled={disabled}
     />
   );
 };
@@ -248,13 +157,11 @@ export const NotificationsPage = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get("/notifications", {
-          params: {
-            token: stateAuth.token,
-          },
-        });
+        const response = await fetch(
+          `http://localhost:4000/notifications?token=${stateAuth.token}`
+        );
 
-        const data = response.data;
+        const data = await response.json();
 
         if (Array.isArray(data.notifications)) {
           setNotifications(data.notifications);
@@ -264,37 +171,6 @@ export const NotificationsPage = () => {
             data.error || "Unknown error"
           );
         }
-
-        //============
-
-        // const response = await fetch(
-        //   `http://localhost:4000/notifications?token=${stateAuth.token}`
-        //   //   {
-        //   //     // method: "POST",
-        //   //     // headers: {
-        //   //     //   "Content-Type": "application/json",
-        //   //     // },
-        //   //     // body: JSON.stringify({
-        //   //     //   // token: stateAuth.token,
-        //   //     //   token: getTokenSession(),
-        //   //     // }),
-        //   //   }
-        // );
-
-        // if (response.ok) {
-        //   const data = await response.json();
-
-        //   if (Array.isArray(data.notifications)) {
-        //     setNotifications(data.notifications);
-        //   } else {
-        //     console.error(
-        //       "Error fetching notifications:",
-        //       data.error || "Unknown error"
-        //     );
-        //   }
-        // } else {
-        //   console.error(`Error fetching notifications: ${response.statusText}`);
-        // }
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }
@@ -331,18 +207,6 @@ export const SendPage = () => {
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const handleInputChange = (event) => {
-    const newValue = event.target.value;
-    onChange({
-      target: {
-        name: "amount",
-        value: newValue,
-      },
-    });
-    const newErrorMessages = validateAmount(newValue);
-    setErrorMessages(newErrorMessages);
   };
 
   const handleSubmit = async (stop) => {
@@ -382,11 +246,7 @@ export const SendPage = () => {
     <Send
       valueEmail={values.email}
       valueAmount={values.amount}
-      //
-      handleInputChange={handleInputChange}
       onChange={onChange}
-      //
-
       errorMessages={errorMessages}
       onClick={handleSubmit}
       disabled={disabled}
@@ -435,23 +295,18 @@ export const TransactionPage = () => {
   };
 
   useEffect(() => {
-    // const searchParams = new URLSearchParams(location.search);
-    // const transactionId = searchParams.get("transactionId");
-
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/transaction`, {
-          params: {
-            token: getTokenSession(),
-            transactionId: transactionId,
-          },
-        });
+        const response = await fetch(
+          `http://localhost:4000/transaction?token=${stateAuth.token}&transactionId=${transactionId}`
+        );
 
-        const transactionData = response.data.transaction;
+        const data = await response.json();
+        const transactionData = data.transaction;
         const formattedDate = convertDate(new Date(transactionData.date));
 
         setData({
-          ...response.data,
+          ...data,
           transaction: {
             ...transactionData,
             date: formattedDate,
@@ -462,44 +317,6 @@ export const TransactionPage = () => {
       } catch (error) {
         console.error("Error fetching balance data:", error);
       }
-
-      //====================
-
-      //   try {
-      //     const response = await fetch(
-      //       `http://localhost:4000/transaction/${transactionId}`
-      //       //   {
-      //       //     method: "POST",
-      //       //     headers: {
-      //       //       "Content-Type": "application/json",
-      //       //     },
-      //       //     body: JSON.stringify({
-      //       //       token: stateAuth.token,
-      //       //       transactionId: transactionId,
-      //       //     }),
-      //       //   }
-      //     );
-
-      //     if (response.ok) {
-      //       const data = await response.json();
-      //       const transactionData = data.transaction;
-      //       const formattedDate = convertDate(new Date(transactionData.date));
-
-      //       setData({
-      //         ...data,
-      //         transaction: {
-      //           ...transactionData,
-      //           date: formattedDate,
-      //         },
-      //       });
-      //       setTransactionType(transactionData.type);
-      //       setFormattedDate(formattedDate);
-      //     } else {
-      //       console.error(`Error fetching balance data: ${response.statusText}`);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error fetching balance data:", error);
-      //   }
     };
 
     if (stateAuth.token && transactionId) {
@@ -507,21 +324,7 @@ export const TransactionPage = () => {
     }
   }, []);
 
-  useEffect(() => {
-    let cardAmountElement = document.querySelector(".transaction__amount");
-
-    if (transactionType === "Receipt") {
-      cardAmountElement.classList.add("transaction__amount-plus");
-      cardAmountElement.classList.remove("transaction__amount-minus");
-    } else {
-      cardAmountElement.classList.add("transaction__amount-minus");
-      cardAmountElement.classList.remove("transaction__amount-plus");
-    }
-  }, [transactionType]);
-
-  return <Transaction data={data} />;
+  return <Transaction data={data} transactionType={transactionType} />;
 };
-
-////////////////
 
 // ===========================================

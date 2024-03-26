@@ -1,40 +1,32 @@
-import React from "react";
-import { useState, useEffect } from "react";
-
 import BackButton from "../../component/back-button";
 import Divider from "../../component/divider";
-// import Field from "../../component/field";
-// import FieldPassword from "../../component/field-password";
-// import { saveSession } from "../../script/session";
 
 import "./index.scss";
-// import { useAuth } from "../../context/AuthContext";
-// import { useNavigate } from "react-router-dom";
-import { ChangeEmailForm, ChangePasswordForm } from "../../component/change";
+import { EmailForm, PasswordForm } from "../../component/change";
 import Page from "../../page/Page";
+import PageBalance from "../../page/PageBalance";
+
 import AuthBox from "../../component/authBox";
 import HeaderDark from "../../component/header-dark";
 import Button from "../../component/button";
 
-/////////////////////////////////
-
 const Settings = ({ logout }) => {
   return (
-    <Page>
+    <PageBalance>
       <AuthBox>
         <HeaderDark />
-        <header className="account-page__header">
+        <header className="balanceBox-title">
           <BackButton />
 
-          <div className="auth__title--small">Settings</div>
+          <div className="auth__title--medium">Settings</div>
         </header>
 
         <div className="auth__box">
-          <ChangeEmailForm />
+          <EmailForm />
 
           <Divider />
 
-          <ChangePasswordForm />
+          <PasswordForm />
 
           <Divider />
 
@@ -43,7 +35,7 @@ const Settings = ({ logout }) => {
           </Button>
         </div>
       </AuthBox>
-    </Page>
+    </PageBalance>
   );
 };
 

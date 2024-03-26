@@ -1,19 +1,6 @@
 @use "../../style" as s;
+
 @use "../../style/auth.scss" as auth;
-
-.field--num__wrapper {
-	position: relative;
-
-	&::after {
-		content: "$ ";
-		position: absolute;
-		color: s.color(dark);
-		font-size: 14px;
-		top: 42.5px;
-		left: 15px;
-		pointer-events: none;
-	}
-}
 
 .button--password {
 	@include s.click;

@@ -19,7 +19,7 @@ import {
   SignupPage,
   RecoveryPage,
   RecoveryConfirmPage,
-} from "./group";
+} from "./group/authorization";
 
 import {
   BalancePage,

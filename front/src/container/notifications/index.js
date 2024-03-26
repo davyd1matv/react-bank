@@ -1,23 +1,19 @@
-import Notification from "../../component/notification";
 import BackButton from "../../component/back-button";
-
-import React, { useEffect, useState } from "react";
 import "./index.scss";
-// import axios from "axios";
-// import { useAuth } from "../../context/AuthContext";
 import Page from "../../page/Page";
+import PageBalance from "../../page/PageBalance";
 import AuthBox from "../../component/authBox";
 import HeaderDark from "../../component/header-dark";
 import BoxInfo from "../../component/boxInfo";
 
 const Notifications = ({ notifications }) => {
   return (
-    <Page>
+    <PageBalance>
       <AuthBox>
         <HeaderDark />
-        <header className="account-page__header">
+        <header className="balanceBox-title">
           <BackButton />
-          <div className="auth__title">Notifications</div>
+          <div className="auth__title--medium">Notifications</div>
         </header>
 
         <main className="page__section">
@@ -36,7 +32,7 @@ const Notifications = ({ notifications }) => {
           )}
         </main>
       </AuthBox>
-    </Page>
+    </PageBalance>
   );
 };
 

@@ -7,7 +7,6 @@ const BoxNumber = ({
   type,
   onChange,
   value,
-  labelClassName,
   id,
   errorMessages,
 }) => {
@@ -26,18 +25,17 @@ const BoxNumber = ({
         <input
           type={type}
           name={name}
-          className={`number-input`} // Слід змінити або переробити
+          className="number-input"
           step="any"
           onChange={onChange}
           value={value}
           onBlur={handleFocus}
-          //   onFocus={() => name === "amount" && setFocused(true)}
           focused={focused.toString()}
-          patternn={`^[0-9]+(\.[0-9]{1,3})?$`}
+          pattern="^([0-9]{1,7})?$"
         />
         <div>
           {errorMessages.map((error, index) => (
-            <div className="error__message" key={index}>
+            <div className="number__message" key={index}>
               {error}
             </div>
           ))}

@@ -9,8 +9,7 @@ import { setAlert } from "../../component/alert";
 import { useAuth } from "../../App";
 import BoxField from "../../component/boxFiled";
 
-export const ChangeEmailForm = () => {
-  // Change Email Form
+export const EmailForm = () => {
   const { authState, login } = useAuth();
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -19,8 +18,6 @@ export const ChangeEmailForm = () => {
   });
 
   const [disabled, setDisabled] = useState(false);
-
-  //   const [alert, setAlert] = useState({ status: "", text: "" });
 
   useEffect(() => {
     checkDisabled();
@@ -82,7 +79,7 @@ export const ChangeEmailForm = () => {
           type="email"
           placeholder="test@test.com"
           label="Email"
-          errorMessage="Enter the correct value of the e-mail address"
+          errorMessage="Enter the correct email address"
           VE={values.email}
           onChange={onChange}
           disabled={disabled}
@@ -109,12 +106,12 @@ export const ChangeEmailForm = () => {
   );
 };
 
-export const ChangePasswordForm = () => {
+export const PasswordForm = () => {
   const { authState, login } = useAuth();
 
   const navigate = useNavigate();
   const [values, setValues] = useState({
-    passwordOld: "",
+    password: "",
     passwordNew: "",
   });
 
@@ -146,7 +143,7 @@ export const ChangePasswordForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          passwordOld: values.passwordOld,
+          password: values.password,
           passwordNew: values.passwordNew,
           token: getTokenSession(),
         }),
@@ -174,12 +171,12 @@ export const ChangePasswordForm = () => {
 
       <div className="auth__field">
         <BoxField
-          name="passwordOld"
+          name="password"
           type="password"
           placeholder="Your password"
-          label="Old password"
+          label="Password"
           errorMessage="Please enter the value"
-          VP={values.passwordOld}
+          VP={values.password}
           onChange={onChange}
           disabled={disabled}
         />

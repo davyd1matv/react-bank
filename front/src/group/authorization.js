@@ -69,6 +69,9 @@ export const SignupPage = () => {
         saveSession(data.session);
         login(data.session.user, data.session.token);
 
+        const newcode = data.confirm.code;
+        alert(`Your code - ${newcode}`);
+
         navigate("/signup-confirm");
       } else {
         setAlert("error", data.message);
@@ -101,7 +104,6 @@ export const SignupConfirmPage = () => {
   const navigate = useNavigate();
 
   const [disabled, setDisabled] = useState(false);
-  const [confirmationCode, setConfirmationCode] = useState("");
 
   useEffect(() => {
     checkDisabled();
@@ -128,8 +130,9 @@ export const SignupConfirmPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          code: Number(values.code), // Можливо слід прописати лише values.code
-          token: getTokenSession(),
+          code: Number(values.code),
+          token: stateAuth.token,
+          //   token: getTokenSession(),
         }),
       });
 
@@ -149,25 +152,19 @@ export const SignupConfirmPage = () => {
   };
 
   const handleRenewLinkClick = async (stop) => {
-    stop.preventDefault(); // начебто onSubmit немає, то ж  може слід прибрати
+    stop.preventDefault();
 
     try {
       const response = await fetch(
-        `http://localhost:4000/signup-confirm-code`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: stateAuth.user.email }),
-        }
+        `http://localhost:4000/signup-confirm-code?email=${stateAuth.user.email}`
       );
 
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
-        if (data.confirm !== undefined) {
+        if (data.confirm.code !== undefined) {
           const newCode = data.confirm.code;
-          setConfirmationCode(newCode);
+          alert(`Your code - ${newCode}`);
         } else {
           console.error("Confirmation code not found in response");
         }
@@ -190,7 +187,6 @@ export const SignupConfirmPage = () => {
       disabled={disabled}
       AS={alert.status}
       AT={alert.text}
-      confirmationCode={confirmationCode}
       logout={logout}
     />
   );
@@ -288,7 +284,7 @@ export const RecoveryPage = () => {
   };
 
   const handleSubmit = async (stop) => {
-    stop.preventDefault(); // не дає перезавантажити сторінку
+    stop.preventDefault();
 
     setAlert("progress", "Loading...");
 
@@ -310,6 +306,10 @@ export const RecoveryPage = () => {
 
         saveSession(data.session);
         login(data.session.user, data.session.token);
+
+        const newcode = data.confirm.code;
+        alert(`Your code - ${newcode}`);
+
         navigate(`/recovery-confirm`);
       } else {
         setAlert("error", data.message);
@@ -337,7 +337,6 @@ export const RecoveryConfirmPage = () => {
   });
   const { stateAuth, login } = useAuth();
   const [disabled, setDisabled] = useState(false);
-  const [confirmationCode, setConfirmationCode] = useState("");
 
   useEffect(() => {
     checkDisabled();
@@ -375,7 +374,7 @@ export const RecoveryConfirmPage = () => {
         setAlert("success", data.message);
         login(data.session.token);
         saveSession(data.session);
-        navigate("/balance");
+        navigate("/signin");
       } else {
         setAlert("error", data.message);
       }
@@ -389,21 +388,15 @@ export const RecoveryConfirmPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/recovery-confirm-code`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token: getTokenSession() }),
-        }
+        `http://localhost:4000/recovery-confirm-code?token=${stateAuth.token}`
       );
 
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
         if (data.confirm !== undefined) {
           const newCode = data.confirm.code;
-          setConfirmationCode(newCode);
+          alert(`Your code - ${newCode}`);
         } else {
           console.error("Confirmation code not found in response");
         }
@@ -427,7 +420,6 @@ export const RecoveryConfirmPage = () => {
       disabled={disabled}
       AS={alert.status}
       AT={alert.text}
-      confirmationCode={confirmationCode}
     />
   );
 };

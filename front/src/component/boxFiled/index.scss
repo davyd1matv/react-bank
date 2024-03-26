@@ -72,11 +72,11 @@
 		height: 30px;
 		width: 30px;
 
-		background-image: url('../../../public/svg/password-hide.svg');
+		background-image: url('../../../public/svg/hide.svg');
 		background-size: cover;
 
 		&[show] {
-			background-image: url('../../../public/svg/password-show.svg');
+			background-image: url('../../../public/svg/show.svg');
 		}
 
 		position: absolute;

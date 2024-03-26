@@ -16,7 +16,6 @@ const RecoveryConfirmForm = ({
   onChange,
   handleRenewLinkClick,
   disabled,
-  confirmationCode,
 }) => {
   return (
     <Page>
@@ -66,8 +65,6 @@ const RecoveryConfirmForm = ({
           </Button>
 
           <span className={"alert alert--disabled"} />
-
-          <div>{confirmationCode}</div>
         </form>
       </AuthBox>
     </Page>

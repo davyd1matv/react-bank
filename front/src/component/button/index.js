@@ -5,7 +5,6 @@ export default function Button({
   pink,
   red,
   style,
-  condition,
   onClick,
   type,
   disabled,

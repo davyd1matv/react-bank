@@ -1,6 +1,4 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../App";
 import "./index.scss";
 import Page from "../../page/Page";
 import Header from "../../component/header";
@@ -17,6 +15,8 @@ function WelcomePage({ stateAuth, logout }) {
             <div className="home-page__subtext">You are logged in.</div>
           </div>
 
+          <div className="home-page-image" />
+
           <div className="home-page__bottom">
             <Button red onClick={logout}>
               Logout
@@ -29,6 +29,7 @@ function WelcomePage({ stateAuth, logout }) {
             <Header />
             <h1 className="home-page__title">Hello!</h1>
             <div className="home-page__subtext">Welcome to bank app</div>
+            <div className="home-page-image" />
           </div>
 
           <div className="home-page__bottom">

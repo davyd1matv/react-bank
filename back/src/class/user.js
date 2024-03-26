@@ -1,5 +1,24 @@
-const { UserNotification } = require('./notification')
-const { UserTransaction } = require('./transaction')
+class Notification {
+  constructor(text, type) {
+    this.text = text
+    this.type = type
+    this.date = new Date()
+  }
+}
+
+class Transaction {
+  static count = 1
+
+  constructor(sender, getter, type, amount) {
+    this.id = Transaction.count++
+
+    this.sender = sender
+    this.getter = getter
+    this.type = type
+    this.amount = amount
+    this.date = new Date()
+  }
+}
 
 class User {
   static #list = []
@@ -49,10 +68,10 @@ class User {
 
       return this.balance
     }
-  } //Можливо слід спростити код
+  }
 
   createTransaction(sender, getter, type, amount) {
-    const transaction = new UserTransaction(
+    const transaction = new Transaction(
       sender,
       getter,
       type,
@@ -73,7 +92,7 @@ class User {
   }
 
   createNotification(text, type) {
-    const notification = new UserNotification(text, type)
+    const notification = new Notification(text, type)
 
     this.listNotifications.push(notification)
 

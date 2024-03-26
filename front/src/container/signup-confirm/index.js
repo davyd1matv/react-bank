@@ -13,9 +13,6 @@ const SignupConfirm = ({
   onChange,
   handleRenewLinkClick,
   disabled,
-  AS,
-  AT,
-  confirmationCode,
   logout,
 }) => {
   return (
@@ -60,8 +57,6 @@ const SignupConfirm = ({
           </Button>
 
           <span className={"alert alert--disabled"} />
-
-          <div>{confirmationCode}</div>
         </form>
       </AuthBox>
     </Page>

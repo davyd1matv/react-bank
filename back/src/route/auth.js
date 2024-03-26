@@ -7,7 +7,7 @@ const { Session } = require('../class/session')
 
 User.create({
   email: 'taras@test.com',
-  password: 11111,
+  password: '123qwe!Q',
 })
 
 // ================================================================
@@ -36,10 +36,11 @@ router.post('/signup', function (req, res) {
 
     const session = Session.create(newUser)
 
-    Confirm.create(newUser.email)
+    const newcode = Confirm.create(newUser.email)
 
     return res.status(200).json({
       message: 'User has been successfully registered',
+      confirm: newcode,
       session,
     })
   } catch (error) {
@@ -100,40 +101,25 @@ router.post('/signup-confirm', function (req, res) {
   }
 })
 
-router.post('/signup-confirm-code', function (req, res) {
+router.get('/signup-confirm-code', function (req, res) {
   try {
-    const { email } = req.body
+    const email = req.query.email
 
     console.log('signup-condirm-code', email)
 
     if (!email) {
       return res.status(400).json({
-        message: 'Не вказана електронна пошта',
+        message: 'Email not specified',
       })
     }
-
-    const newCode = Confirm.create(email)
-
-    if (newCode) {
-      return res.status(200).json({
-        message:
-          'Новий код підтвердження створений успішно',
-        newCode,
-      })
-    }
-
-    const session = Session.get(token)
-
-    const user = User.getByEmail(session.user.email)
-
-    console.log('email for code 1', email)
 
     if (email) {
       console.log('email for code 2', email)
       const confirm = Confirm.create(email)
+
       return res.status(200).json({
         confirm: confirm,
-      }) // Можливо слід прибрати
+      })
     } else {
       return res.status(400).json({
         message: 'Confirmation failed',
@@ -173,6 +159,8 @@ router.post('/signin', function (req, res) {
     }
 
     const session = Session.create(user)
+
+    session.user.isConfirm = true
 
     const notification = user.createNotification(
       'New login',
@@ -214,14 +202,14 @@ router.post('/recovery', function (req, res) {
       })
     }
 
-    // Можливо слід додати:
     const session = Session.create(user)
     console.log('recovery-session', session)
 
-    Confirm.create(email)
+    const newcode = Confirm.create(email)
 
     return res.status(200).json({
       message: 'Password recovery code has been sent',
+      confirm: newcode,
       session,
     })
   } catch (err) {
@@ -276,9 +264,9 @@ router.post('/recovery-confirm', function (req, res) {
   }
 })
 
-router.post('/recovery-confirm-code', function (req, res) {
+router.get('/recovery-confirm-code', function (req, res) {
   try {
-    const { token } = req.body
+    const token = req.query.token
 
     console.log('recovery-config-code-token', token)
 
@@ -295,12 +283,13 @@ router.post('/recovery-confirm-code', function (req, res) {
     )
 
     const newCode = Confirm.create(session.user.email)
+    console.log('newcode', newCode)
 
     if (newCode) {
       return res.status(200).json({
         message:
-          'Новий код підтвердження створений успішно',
-        newCode,
+          'The new verification code was created successfully',
+        confirm: newCode,
       })
     } else {
       return res.status(400).json({

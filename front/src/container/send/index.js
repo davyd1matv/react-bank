@@ -1,14 +1,9 @@
 import BackButton from "../../component/back-button";
-import Field from "../../component/field";
 import BoxNumber from "../../component/boxNumber";
-// import { useNavigate } from "react-router-dom";
-// import { useState, useEffect } from "react";
-// import { saveSession } from "../../script/session";
-// import { useAuth } from "../../context/AuthContext";
-// import { validateAmount } from "../../script/utilities";
 import "./index.scss";
 
 import Page from "../../page/Page";
+import PageBalance from "../../page/PageBalance";
 import AuthBox from "../../component/authBox";
 import HeaderDark from "../../component/header-dark";
 import Button from "../../component/button";
@@ -20,17 +15,16 @@ const Send = ({
   errorMessages,
   onClick,
   onChange,
-  handleInputChange,
   disabled,
 }) => {
   return (
-    <Page>
+    <PageBalance>
       <AuthBox>
         <HeaderDark />
-        <header className="account-page__header">
+        <header className="balanceBox-title">
           <BackButton />
 
-          <div className="auth__title">Send</div>
+          <div className="auth__title--medium">Send</div>
         </header>
 
         <div className="auth__field">
@@ -50,7 +44,7 @@ const Send = ({
             type="number"
             label="Sum"
             value={valueAmount}
-            onChange={handleInputChange}
+            onChange={onChange}
             labelClassName="field__label"
             errorMessages={errorMessages}
           />
@@ -62,7 +56,7 @@ const Send = ({
           <span className={"alert alert--disabled"} />
         </div>
       </AuthBox>
-    </Page>
+    </PageBalance>
   );
 };
 
